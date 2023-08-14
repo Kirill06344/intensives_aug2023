@@ -3,14 +3,29 @@ package ru.yandex.tasks;
 import java.util.Arrays;
 
 public class Task12Spiral {
-    public static int[][] draw (int N) {
+    public static int[][] draw (int n) {
         /*
          * Отрисовывает "спираль" в двумерном массиве по часовой стрелке
          * -10^3 <= N <= 10^3
          * Выход: массив со спиралью
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        int [][] result = new int[n][n];
+        int [][] move  =  {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int moveType = 0;
+        int i = 0, j = 0;
+        for (int number = 1; number <= n * n; number++) {
+            result[i][j] = number;
+            if (i + move[moveType][0] == n
+                    || j + move[moveType][1] == -1
+                    || j + move[moveType][1] == n
+                    || result[i + move[moveType][0]][j + move[moveType][1]] != 0) {
+                moveType = (moveType + 1) % 4;
+            }
+            i += move[moveType][0];
+            j += move[moveType][1];
+        }
+        return result;
     }
 
     public static void selfCheck() {
@@ -25,5 +40,9 @@ public class Task12Spiral {
         };
 
         assert Arrays.deepEquals(output, draw(7));
+    }
+
+    public static void main(String[] args) {
+        selfCheck();
     }
 }
