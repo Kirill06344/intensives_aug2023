@@ -9,7 +9,22 @@ public class Task11BiggestSubarraySum {
          * Выход: Subarray
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        Subarray subarray = new Subarray();
+        int answer = 0, prefSum = 0, minPrefSum = 0, inxOfMinPrefSum = 0;
+        for (int i = 0; i < numbers.length; ++i) {
+            prefSum += numbers[i];
+            int currSum = prefSum - minPrefSum;
+            if (currSum > answer) {
+                subarray.left = inxOfMinPrefSum;
+                subarray.right = i + 1;
+                answer = currSum;
+            }
+            if (prefSum < minPrefSum) {
+                minPrefSum = prefSum;
+                inxOfMinPrefSum = i + 1;
+            }
+        }
+        return subarray;
     }
 
     public static void selfCheck() {
@@ -18,5 +33,9 @@ public class Task11BiggestSubarraySum {
 
         assert ans != null;
         assert (ans.left == 3 && ans.right == 6);
+    }
+
+    public static void main(String[] args) {
+        selfCheck();
     }
 }
