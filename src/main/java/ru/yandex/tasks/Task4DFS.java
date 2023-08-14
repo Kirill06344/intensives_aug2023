@@ -1,16 +1,22 @@
 package ru.yandex.tasks;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Task4DFS {
-    public void runSearch() {
-        /*
-         * Реализация dfs
-         */
-        // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+
+
+    public static void runSearch(int root, int [][] tree, List<Integer> answer) {
+        if (root == -1)  return;
+        runSearch(tree[root][0], tree, answer);
+        runSearch(tree[root][1], tree, answer);
+        answer.add(root);
     }
 
     public static int[] getDFSOrder(int[][] tree, int root) {
+
+        List<Integer> answer = new ArrayList<>();
+        runSearch(root, tree, answer);
+
         /*
          * Функция возвращает массив с порядковыми номерами вершин в обходе
          * Сначала левое поддерево, затем правое, затем корень.
@@ -19,7 +25,7 @@ public class Task4DFS {
          * root - корень, откуда нужно начинать обход
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        return answer.stream().mapToInt(i -> i).toArray();
     }
 
     public static void selfCheck() {
@@ -45,5 +51,9 @@ public class Task4DFS {
         assert (Arrays.equals(getDFSOrder(tree, 3), ans2));
         assert (Arrays.equals(getDFSOrder(tree, 2), ans3));
         assert (Arrays.equals(getDFSOrder(tree, 6), ans4));
+    }
+
+    public static void main(String[] args) {
+        selfCheck();
     }
 }
