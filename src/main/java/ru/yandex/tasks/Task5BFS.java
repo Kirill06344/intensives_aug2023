@@ -1,16 +1,23 @@
 package ru.yandex.tasks;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Task5BFS {
-    public void runSearch() {
-        /*
-         * Реализация bfs
-         */
-        // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+    public static void runSearch(int root, int [][] tree, List<Integer> answer) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Integer el = queue.poll();
+            if (el == -1) continue;
+            answer.add(el);
+            queue.offer(tree[el][0]);
+            queue.offer(tree[el][1]);
+        }
     }
 
     public static int[] getBFSOrder(int[][] tree, int root) {
+        List<Integer> answer = new ArrayList<>();
+        runSearch(root, tree, answer);
         /*
          * Функция возвращает массив с порядковыми номерами вершин в обходе
          * Дано дерево из n (<= 10^5) вершин (пронумерованных от 0 до n-1)
@@ -18,7 +25,7 @@ public class Task5BFS {
          * root - корень, откуда нужно начинать обход
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return null;
+        return answer.stream().mapToInt(i -> i).toArray();
     }
 
     public static void selfCheck() {
@@ -44,5 +51,9 @@ public class Task5BFS {
         assert (Arrays.equals(getBFSOrder(tree, 3), ans2));
         assert (Arrays.equals(getBFSOrder(tree, 2), ans3));
         assert (Arrays.equals(getBFSOrder(tree, 6), ans4));
+    }
+
+    public static void main(String[] args) {
+        selfCheck();
     }
 }
