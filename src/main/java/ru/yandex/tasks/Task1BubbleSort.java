@@ -10,7 +10,7 @@ public class Task1BubbleSort {
         while (flag) {
             flag = false;
             for (int i = 1; i < size; ++i) {
-                if (numbers.get(i) > numbers.get(i - 1)) {
+                if (numbers.get(i) < numbers.get(i - 1)) {
                     swap(numbers, i, i - 1);
                     flag = true;
                 }
@@ -23,7 +23,7 @@ public class Task1BubbleSort {
 
     public static void swap(ArrayList<Integer> numbers, int i, int j) {
         Integer tmp = numbers.get(i);
-        numbers.set(i, tmp);
+        numbers.set(i, numbers.get(j));
         numbers.set(j, tmp);
     }
 
