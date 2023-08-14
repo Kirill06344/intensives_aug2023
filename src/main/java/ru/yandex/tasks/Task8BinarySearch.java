@@ -8,8 +8,18 @@ public class Task8BinarySearch {
          * Выход: i, где numbers[i] = number, -1, если такого i нет
          * Если таких i несколько, вывести наибольший
          */
-        // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return -1;
+
+        int l = 0, r = sortedList.length;
+        while (l < r - 1) {
+            int mid = l + (r - l) / 2;
+            if (number < sortedList[mid]) {
+                r = mid;
+            } else {
+                l = mid;
+            }
+        }
+
+        return number == sortedList[l] ? l : -1;
     }
 
     public static void selfCheck() {
@@ -18,5 +28,12 @@ public class Task8BinarySearch {
         for (int i = 0; i < input.length; i++) {
             assert (find(input[i], input) == i);
         }
+
+        input = new int[]{1, 4, 7, 7, 7, 9, 9};
+        assert (find(7, input) == 4);
+    }
+
+    public static void main(String[] args) {
+        selfCheck();
     }
 }
